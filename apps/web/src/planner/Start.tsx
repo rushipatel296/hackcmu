@@ -234,14 +234,14 @@ function Field({
   placeholder?: string;
 }): React.ReactElement {
   return (
-    <label className="grid gap-1 text-[11px] font-medium text-muted ">
+    <label className="grid min-w-0 gap-1 text-[11px] font-medium text-muted">
       {label}
       <input
         type={type}
         value={value}
         placeholder={placeholder}
         onChange={(event) => onChange(event.target.value)}
-        className="rounded-xl bg-sunken px-3.5 py-2.5 text-sm text-ink placeholder:text-faint focus:outline-none"
+        className="w-full min-w-0 rounded-xl bg-sunken px-3.5 py-2.5 text-sm text-ink placeholder:text-faint focus:outline-none"
       />
     </label>
   );
