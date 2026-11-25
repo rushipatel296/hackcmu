@@ -2,7 +2,7 @@
 
 Group trips get planned in group chats, and then someone has to dig through 200 messages to figure out what was actually decided. This app keeps the chat and the plan in the same place: you talk it through with your friends, and the calendar, budgets and map update from what everyone agreed to.
 
-<!-- Live demo: add the Vercel URL here once it's deployed -->
+**Live demo: [asapscotty.vercel.app](https://asapscotty.vercel.app/)**
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=rv8TqArMkfc">
