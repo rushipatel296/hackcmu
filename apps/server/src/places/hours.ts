@@ -31,9 +31,14 @@ export function normalizeHours(options: {
     return null;
   }
 
+  // The parser reads and returns wall-clock time in the host's zone, not the
+  // trip's. Querying host-local midnights and reading the results back as
+  // host-local wall clock makes the result independent of where this runs.
+  if (!DateTime.local().setZone(options.timezone).isValid) return null;
+
   const days: HoursDay[] = [];
   for (const date of options.dates) {
-    const start = DateTime.fromISO(date, { zone: options.timezone });
+    const start = DateTime.fromISO(date);
     if (!start.isValid) continue;
     const end = start.plus({ days: 1 });
 
@@ -48,8 +53,8 @@ export function normalizeHours(options: {
       date,
       intervals: intervals
         .map(([from, to]) => ({
-          start_minute: minuteOf(from, options.timezone, date),
-          end_minute: minuteOf(to, options.timezone, date),
+          start_minute: minuteOf(from, start),
+          end_minute: minuteOf(to, start),
         }))
         .filter((interval) => interval.end_minute > interval.start_minute),
     });
@@ -57,10 +62,10 @@ export function normalizeHours(options: {
   return days;
 }
 
-/** Minutes from that date's local midnight, clamped to the day it belongs to. */
-function minuteOf(instant: Date, timezone: string, date: string): number {
-  const local = DateTime.fromJSDate(instant, { zone: timezone });
-  const midnight = DateTime.fromISO(date, { zone: timezone });
-  const minutes = Math.round(local.diff(midnight, 'minutes').minutes);
+/** Wall-clock minutes from that date's midnight, clamped to the day it belongs to. */
+function minuteOf(instant: Date, midnight: DateTime): number {
+  const local = DateTime.fromJSDate(instant);
+  const days = Math.round(local.startOf('day').diff(midnight, 'days').days);
+  const minutes = days * 1440 + local.hour * 60 + local.minute;
   return Math.max(0, Math.min(1440, minutes));
 }
