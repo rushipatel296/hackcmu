@@ -4,6 +4,14 @@ Group trips get planned in group chats, and then someone has to dig through 200 
 
 <!-- Live demo: add the Vercel URL here once it's deployed -->
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=rv8TqArMkfc">
+    <img src="https://img.youtube.com/vi/rv8TqArMkfc/hqdefault.jpg" alt="Watch the demo video" width="640">
+  </a>
+  <br>
+  <sub>▶ <a href="https://www.youtube.com/watch?v=rv8TqArMkfc"><b>Watch the demo video</b></a></sub>
+</p>
+
 ![Planner with chat on the left and the shared calendar on the right](docs/screenshots/planner.png)
 
 ## What it does
