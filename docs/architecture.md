@@ -1,8 +1,6 @@
 # Group Trip Planner Architecture
 
-Status: architect's implementation handoff, 2026-09-12. Kartik retains final technical and product authority. This document contains architecture, not application code.
-
-Product input: [trip-planner-v1.md](.claude/agents/trip-planner-v1.md). The resolutions below explicitly amend conflicting parts of that specification. Implement the resolved contract, not a mixture of contradictory rules. Surface further material changes to Kartik. `plan.md` remains authoritative for assignments and progress.
+The full design: data model, API contract, concurrency, extraction pipeline and security model.
 
 ## 1. Review Findings
 
@@ -397,7 +395,7 @@ Initial rate limits: 5 trip creates/hour/session, 20 invite attempts/minute/IP, 
 
 ## 14. Agent Handoff and Acceptance Gates
 
-This is dependency order, not completion status. Assignments and progress belong in plan.md.
+This is dependency order.
 
 1. **Foundation:** contracts, schema/migrations, same-trip constraints, anonymous membership, RLS, message ordering, idempotency/versioning. Backend owns schema/domain; frontend reviews snapshot and command contracts before parallel feature work.
 2. **Manual vertical slice:** wizard/join, two-browser chat, calendar, add/edit/delete/restore, own attendance/budget, deterministic checks and manual places. Prove LLM-disabled usability. Build extraction fixtures/prompt experiments in parallel after operation contracts are fixed.
